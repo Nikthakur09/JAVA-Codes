@@ -1,0 +1,23 @@
+   public static String replaceC(String str){
+            String ans = "";
+            if(str.isEmpty()){
+                return str;
+            }
+
+            else if (str.charAt(0) !='c') {
+//              ans += str.charAt(0);
+           }
+            replaceC(str.substring(1));
+            String smallAns = str.replace('c','x');
+
+            return smallAns;
+        }
+
+        public static void main(String[] args) {
+            String s = "ccgrtnic";
+            System.out.println(replaceC(s));
+
+           // int minimumEnergyLevel = findMinimumEnergyLevel(energyLevels, X);
+            //System.out.println("Minimum energy level to save exactly " + X + " animals: " + minimumEnergyLevel);
+        }
+    }
