@@ -1,0 +1,41 @@
+        public static void main(String[] args) {
+
+        int maze[][] = {  {1,0,1},
+                          {1,1,0},
+                          {0,1,1}     };
+        System.out.println(pathPossible(maze));
+        }
+        public static boolean mazeSolution(int maze[][],int i, int j, int path[][]){
+        int n = maze.length;
+        if(i<0||i>=n||j<0||j>=n||maze[i][j]==0||path[i][j]==1){
+            return false;
+        }
+            path[i][j] = 1;
+        if(i==n-1 && j==n-1){
+            return true;
+        }
+            if(mazeSolution(maze,i,j-1,path)){
+//                path[i][j] = 1;
+                return true;
+            }
+            if(mazeSolution(maze,i,j+1,path)){
+//                path[i][j] = 1;
+                return true;
+            }
+            if(mazeSolution(maze,i-1,j,path)){
+//                path[i][j] = 1;
+                return true;
+            }
+            if(mazeSolution(maze,i+1,j,path)){
+//                path[i][j] = 1;
+                return true;
+            }
+            return false;
+
+        }
+
+    private static boolean pathPossible(int[][] maze) {
+        int n = maze.length;
+        int path[][] = new int[n][n];
+        return mazeSolution( maze,0 ,0, path);
+    }
