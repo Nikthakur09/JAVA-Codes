@@ -1,0 +1,61 @@
+package Recurssion;
+
+
+public class StackUsingLL<T> {
+    private Node<T> head;
+    private int size;
+
+    StackUsingLL(){
+        head = null;
+        size = 0;
+    }
+    int size(){
+        if(head==null){
+            return 0;
+        }
+        int i=0;
+        while(head!=null){
+            head = head.next;
+            i++;
+        }
+        return i;
+    }
+    T top(){
+        if(head==null){
+            System.out.println("Empty stack");
+        }
+        return head.data;
+    }
+    boolean isEmpty(){
+        return (head==null);
+    }
+    void push(T elem){
+        Node<T> e = new Node<>(elem);
+        e.next=head;
+        head = e;
+    }
+
+    T pop(){
+        if(head==null){
+            System.out.println("Empty stack");
+        }
+        Node<T> temp = head;
+        head =  head.next;
+        return temp.data;
+
+    }
+
+    public static void main(String[] args) {
+        StackUsingLL<Integer> stack = new StackUsingLL<>();
+        stack.push(10);
+        stack.push(2);
+        stack.push(100);
+       // System.out.println(stack.top());
+        System.out.println(stack.pop());
+        System.out.println(stack.top());
+        System.out.println(stack.isEmpty());
+        System.out.println(stack.size());
+
+    }
+
+}
