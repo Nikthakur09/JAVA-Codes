@@ -1,0 +1,89 @@
+package learning;
+
+import Recurssion.Node;
+
+import java.util.Scanner;
+
+public class TreeUse {
+    public static Tree<Integer> takeInput(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the next node data");
+        int n = sc.nextInt();
+        Tree<Integer> root = new Tree<>(n);
+        System.out.println(" Enter no of child " +n +" has");
+        int childCount = sc.nextInt();
+        for(int i=0;i<childCount;i++){
+            Tree<Integer> childNode = takeInput();
+            root.children.add(childNode);
+        }
+        return root;
+    }
+    public  static  void print(Tree<Integer >  root){
+        String s = root.data + ": ";
+        for(int i=0; i <root.children.size();i++){
+            s = s + root.children.get(i).data + " ";
+        }
+        System.out.println(s);
+        for(int i=0;i<root.children.size();i++){
+            print(root.children.get(i));
+        }
+    }
+    public static void main(String[] args) {
+
+        Tree<Integer> root = takeInput();
+        print(root);
+//        Tree<Integer> node1 = new Tree<>(20);
+//        Tree<Integer> node2 = new Tree<>(50);
+//        Tree<Integer> node3 = new Tree<>(30);
+//        Tree<Integer> node4 = new Tree<>(40);
+//        root.children.add(node1);
+//        root.children.add(node2);
+//        root.children.add(node4);
+//
+//        node1.children.add(node3);
+//
+//        System.out.println(root.data);
+    }
+}
+
+
+CONSOLE SCREEN 
+
+
+Enter the next node data
+10
+ Enter no of child 10 has
+2
+Enter the next node data
+20
+ Enter no of child 20 has
+2
+Enter the next node data
+40
+ Enter no of child 40 has
+0
+Enter the next node data
+50
+ Enter no of child 50 has
+0
+Enter the next node data
+30
+ Enter no of child 30 has
+2
+Enter the next node data
+60
+ Enter no of child 60 has
+0
+Enter the next node data
+70
+ Enter no of child 70 has
+0
+10: 20 30 
+20: 40 50 
+40: 
+50: 
+30: 60 70 
+60: 
+70: 
+
+Process finished with exit code 0
