@@ -1,0 +1,28 @@
+package TREES;
+
+public class BinaryTreeUse {
+    public static int max(BinaryTreeNode<Integer> root , int k ){
+        if(root == null){
+            return 0;
+        }
+        int lef = max(root.left,k);
+        int right = max(root.right,k);
+        if (root.data>k){
+            return 1+lef+right;
+        }
+        return lef + right;
+    }
+    public static void main(String[] args) {
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<>(10);
+        BinaryTreeNode<Integer> node1 = new BinaryTreeNode<>(20);
+        BinaryTreeNode<Integer> node2= new BinaryTreeNode<>(30);
+        BinaryTreeNode<Integer> node3= new BinaryTreeNode<>(40);
+        BinaryTreeNode<Integer> node4= new BinaryTreeNode<>(50);
+        root.left= node1;
+        root.right=node2;
+        node1.right= node3;
+        node2.left=node4;
+        System.out.println(max(root,30));
+
+    }
+}
