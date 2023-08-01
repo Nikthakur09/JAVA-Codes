@@ -1,0 +1,47 @@
+class Solution{
+    static int [] endPoints(int [][]arr, int R, int C){
+        //code here
+        int dir = 0;
+        int i=0;
+        int j=0;
+        while(true){
+            
+            dir = (dir + arr[i][j]) % 4;
+            if(arr[i][j]==1){
+                arr[i][j]=0;
+            }
+            if(dir == 0){
+                j++;
+            }
+            if(dir==1){
+                i++;
+            }
+            if(dir==2){
+                j--;
+            }
+            if(dir==3){
+                i--;
+            }
+            if(i<0){
+                i++;
+                break;
+            }
+            if(j<0){
+                j++;
+                break;
+            }
+            if(i==arr.length){
+                i--;
+                break;
+            }
+            if(j==arr[0].length){
+                j--;
+                break;
+            }
+        }
+        int a[]= new int[2];
+        a[0] = i;
+        a[1] = j;
+        return a;
+    }
+}
