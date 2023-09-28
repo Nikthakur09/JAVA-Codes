@@ -1,0 +1,60 @@
+import java.util.*;
+
+public class Solution {
+    public static void buildSegTree(ArrayList<Integer> tree, int root, int left, int right) {
+        if (left == right) {
+            tree.set(root, 1);
+        } else {
+            int mid = (left + right) / 2;
+            buildSegTree(tree, 2 * root + 1, left, mid);
+            buildSegTree(tree, 2 * root + 2, mid + 1, right);
+            tree.set(root, tree.get(2 * root + 1) + tree.get(2 * root + 2));
+        }
+    }
+
+    public static int findEmptySlot(ArrayList<Integer> tree, int root, int left, int right, int k) {
+        tree.set(root, tree.get(root) - 1);
+
+        if (left == right) {
+            return left;
+        }
+
+        int mid = (left + right) / 2;
+
+        if (tree.get(2 * root + 1) >= k) {
+            return findEmptySlot(tree, 2 * root + 1, left, mid, k);
+        }
+
+        return findEmptySlot(tree, 2 * root + 2, mid + 1, right, k - tree.get(2 * root + 1));
+    }
+
+    public static ArrayList<Integer> findOrder(ArrayList<Integer> height, ArrayList<Integer> infront) {
+        int n = height.size();
+        ArrayList<ArrayList<Integer>> people = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            ArrayList<Integer> person = new ArrayList<>();
+            person.add(height.get(i));
+            person.add(infront.get(i));
+            people.add(person);
+        }
+
+        people.sort(Comparator.comparingInt(a -> a.get(0)));
+
+        for (int i = 0; i < n; i++) {
+            height.set(i, people.get(i).get(0));
+            infront.set(i, people.get(i).get(1));
+        }
+
+        ArrayList<Integer> tree = new ArrayList<>(Collections.nCopies(4 * n, 0));
+        buildSegTree(tree, 0, 0, n - 1);
+
+        ArrayList<Integer> result = new ArrayList<>(Collections.nCopies(n, 0));
+        for (int i = 0; i < n; i++) {
+            int slot = findEmptySlot(tree, 0, 0, n - 1, infront.get(i) + 1);
+            result.set(slot, height.get(i));
+        }
+
+        return result;
+    }
+}
